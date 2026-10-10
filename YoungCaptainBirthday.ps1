@@ -214,10 +214,11 @@ Read-Host
 
 $img = "$env:TEMP\Hack.jpg"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YoungCaptainMarketHelm/today-init/main/Hack.jpg" -OutFile $img
-Unblock-File -Path $img
-# remove the zone mark by hand if Unblock-File is ignored
+Unblock-File -Path $img -ErrorAction SilentlyContinue
 Remove-Item -Path "$img`:Zone.Identifier" -Force -ErrorAction SilentlyContinue
-explorer $img
+
+# open with the classic photo viewer, not the Photos app
+Start-Process "rundll32.exe" -ArgumentList "shimgvw.dll,ImageView_Fullscreen $img"
 
 Write-Host "  Press any key to continue..." -ForegroundColor DarkGray
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
