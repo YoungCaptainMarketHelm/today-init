@@ -216,7 +216,6 @@ $img = "$env:TEMP\Hack.jpg"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YoungCaptainMarketHelm/today-init/main/Hack.jpg" -OutFile $img
 Unblock-File $img
 explorer $img
-Start-Process "ms-photos:$img"
 
 Write-Host "  Press any key to continue..." -ForegroundColor DarkGray
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
