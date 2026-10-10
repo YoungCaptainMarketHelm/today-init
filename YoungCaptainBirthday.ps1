@@ -1,3 +1,8 @@
+$today = Get-Date
+if ($today.Year -ne 2026 -or $today.Month -ne 10 -or $today.Day -ne 10) {
+    Write-Host "This init only runs on 10 October 2026." -ForegroundColor Red
+    return
+}
 chcp 65001 | Out-Null
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
@@ -207,13 +212,10 @@ Write-Host ""
 Write-Host "  Hit Enter on your keyboard..." -ForegroundColor Yellow
 Read-Host
 
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$hack = Join-Path $here "Hack.jpg"
-if (Test-Path $hack) {
-    Start-Process $hack
-} else {
-    Write-Host "  Put Hack.jpg in this same folder and run it again." -ForegroundColor Red
-}
+$img = "$env:TEMP\Hack.jpg"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/NwaChuksy/today-init/main/Hack.jpg" -OutFile $img
+Start-Process $img
+
 Write-Host "  Press any key to continue..." -ForegroundColor DarkGray
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
