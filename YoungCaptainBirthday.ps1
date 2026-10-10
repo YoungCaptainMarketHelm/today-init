@@ -216,7 +216,7 @@ $img = "$env:TEMP\Hack.jpg"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YoungCaptainMarketHelm/today-init/main/Hack.jpg" -OutFile $img
 Unblock-File -Path $img
 # remove the zone mark by hand if Unblock-File is ignored
-Remove-Item "$img`:Zone.Identifier" -ErrorAction SilentlyContinue
+Remove-Item -Path "$img`:Zone.Identifier" -Force -ErrorAction SilentlyContinue
 explorer $img
 
 Write-Host "  Press any key to continue..." -ForegroundColor DarkGray
